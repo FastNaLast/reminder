@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.monthly.reminder.databinding.ItemTaskBinding
+import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 class TaskAdapter(
@@ -13,6 +14,7 @@ class TaskAdapter(
     private val onLongClick: (Task) -> Unit
 ) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
+    private val dateFormat = DateTimeFormatter.ofPattern("d MMM, HH:mm", Locale("ru"))
     private var items: List<Task> = emptyList()
 
     @SuppressLint("NotifyDataSetChanged")
@@ -36,11 +38,10 @@ class TaskAdapter(
 
         binding.title.text = task.title
         binding.subtitle.text = if (task.enabled) {
-            context.getString(
-                R.string.every_month,
-                task.dayOfMonth,
-                String.format(Locale.getDefault(), "%02d:%02d", task.hour, task.minute)
-            )
+            val time = String.format(Locale.getDefault(), "%02d:%02d", task.hour, task.minute)
+            val next = AlarmScheduler.nextTrigger(task).format(dateFormat)
+            context.getString(R.string.every_month, task.dayOfMonth, time) +
+                "\n" + context.getString(R.string.next_run_short, next)
         } else {
             context.getString(R.string.disabled)
         }

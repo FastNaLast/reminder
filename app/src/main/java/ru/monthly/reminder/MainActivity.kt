@@ -88,7 +88,10 @@ class MainActivity : AppCompatActivity() {
     // ---------------------------------------------------------------- список
 
     private fun refresh() {
-        val tasks = store.all()
+        // Включённые — сверху, ближайшие по времени — первыми.
+        val tasks = store.all().sortedWith(
+            compareBy<Task>({ !it.enabled }, { AlarmScheduler.nextTrigger(it) })
+        )
         adapter.submit(tasks)
         val empty = tasks.isEmpty()
         binding.empty.visibility = if (empty) View.VISIBLE else View.GONE
@@ -157,14 +160,25 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        val dialog = MaterialAlertDialogBuilder(this)
+        val builder = MaterialAlertDialogBuilder(this)
             .setTitle(if (existing == null) R.string.new_task else R.string.edit_task)
             .setView(dialogBinding.root)
             .setPositiveButton(R.string.save, null)
             .setNegativeButton(R.string.cancel, null)
-            .create()
+
+        if (existing != null) {
+            builder.setNeutralButton(R.string.delete, null)
+        }
+
+        val dialog = builder.create()
 
         dialog.setOnShowListener {
+            if (existing != null) {
+                dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setOnClickListener {
+                    dialog.dismiss()
+                    confirmDelete(existing)
+                }
+            }
             dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
                 val title = dialogBinding.inputTitle.text?.toString()?.trim().orEmpty()
                 if (title.isEmpty()) {
