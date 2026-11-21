@@ -140,24 +140,36 @@ C:\dev\android-sdk\platform-tools\adb.exe install -r C:\Projects\MonthlyReminder
 
 ## Сборка в облаке (GitHub Actions)
 
-Файл `.github/workflows/build.yml` собирает APK при каждом `git push` в `main`.
+Репозиторий: <https://github.com/FastNaLast/reminder>
 
-1. Создать пустой репозиторий на GitHub (без README).
-2. В папке проекта:
+- `.github/workflows/build.yml` — при каждом `git push` в `main` прогоняет тесты и
+  собирает APK (вкладка **Actions** → **Artifacts**).
+- `.github/workflows/release.yml` — по тегу `v*` публикует APK в **Releases**.
+
+Самый простой способ получить APK на телефон — открыть страницу релизов:
+
+<https://github.com/FastNaLast/reminder/releases>
+
+Там лежит готовый `napominanie-v1.0.apk`, его можно скачать прямо с телефона
+без входа в аккаунт GitHub. Артефакты из Actions, наоборот, требуют авторизации.
+
+Чтобы выпустить новую версию:
 
 ```powershell
 cd C:\Projects\MonthlyReminder
-git init
-git add .
-git commit -m "Monthly reminder app"
-git branch -M main
+git tag v1.1
+git push origin v1.1
+```
+
+---
+
+## Первый пуш в новый репозиторий
+
+```powershell
+cd C:\Projects\MonthlyReminder
 git remote add origin https://github.com/ВАШ_ЛОГИН/ИМЯ_РЕПО.git
 git push -u origin main
 ```
-
-3. На GitHub: вкладка **Actions** → последняя сборка → **Artifacts** →
-   `monthly-reminder-apk`.
-4. Артефакт можно скачать прямо с телефона и установить.
 
 Ключ подписи лежит в `keystore/debug.keystore` и **закоммичен специально**:
 локальная и облачная сборки дают одинаковую подпись, поэтому приложение
