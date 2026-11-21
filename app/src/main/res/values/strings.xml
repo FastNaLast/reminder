@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Напоминание</string>
+
+    <!-- Уведомления -->
+    <string name="channel_name">Ежемесячные напоминания</string>
+    <string name="channel_desc">Напоминания о задачах, которые нужно делать раз в месяц</string>
+    <string name="notif_text">Пора выполнить задачу</string>
+    <string name="notif_snooze_text">Напоминание (отложено на час)</string>
+    <string name="action_done">Готово</string>
+    <string name="action_snooze">Через час</string>
+
+    <!-- Главный экран -->
+    <string name="add">Добавить</string>
+    <string name="empty_sub">Пока пусто.\nНажмите «Добавить», чтобы создать первое ежемесячное напоминание.</string>
+    <string name="every_month">Каждый месяц, %1$d числа в %2$s</string>
+    <string name="disabled">Выключено</string>
+
+    <!-- Диалог задачи -->
+    <string name="new_task">Новое напоминание</string>
+    <string name="edit_task">Изменить напоминание</string>
+    <string name="task_title_hint">Что напомнить?</string>
+    <string name="title_required">Введите название</string>
+    <string name="save">Сохранить</string>
+    <string name="cancel">Отмена</string>
+    <string name="ok">ОК</string>
+    <string name="close">Закрыть</string>
+    <string name="delete">Удалить</string>
+
+    <string name="day_of_month">День месяца</string>
+    <string name="day_value">День: %1$d</string>
+    <string name="time">Время</string>
+    <string name="time_value">Время: %1$s</string>
+    <string name="next_run">Ближайшее срабатывание: %1$s</string>
+
+    <string name="delete_title">Удалить напоминание?</string>
+    <string name="delete_message">«%1$s» больше не будет напоминать.</string>
+
+    <!-- Разрешения -->
+    <string name="permissions">Разрешения</string>
+    <string name="perm_hint">Без этих разрешений напоминания могут не приходить.</string>
+    <string name="perm_notifications">Уведомления</string>
+    <string name="perm_exact">Точные будильники</string>
+    <string name="perm_battery">Работа в фоне</string>
+    <string name="status_on">Включено</string>
+    <string name="status_off">Выключено</string>
+    <string name="open">Открыть</string>
+    <string name="settings_unavailable">Не удалось открыть настройки</string>
+
+    <!-- О приложении -->
+    <string name="about_title">О приложении</string>
+    <string name="about_text">Все данные хранятся только на телефоне. Приложение не использует интернет.\n\nНапоминание приходит раз в месяц в выбранный день и время. Если такого дня в месяце нет (например, 31 февраля), оно сработает в последний день месяца.\n\nЕсли напоминания не приходят:\n1. Разрешите уведомления.\n2. Разрешите точные будильники.\n3. Снимите ограничения батареи. На Xiaomi/HyperOS включите «Автозапуск» и «Без ограничений», на Samsung выберите «Не ограничивать».\n\nСтатус всех разрешений виден в меню «Разрешения».</string>
+</resources>

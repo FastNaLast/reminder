@@ -1,0 +1,12 @@
+# Нормализация переводов строк между Windows и Linux (CI).
+* text=auto
+
+# Скрипты сборки должны остаться с LF, иначе Linux-раннер их не запустит.
+gradlew text eol=lf
+gradlew.bat text eol=crlf
+*.bat text eol=crlf
+
+# Бинарные файлы не трогаем.
+*.jar binary
+*.keystore binary
+*.png binary

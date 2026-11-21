@@ -1,0 +1,66 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Собрать APK (debug)",
+      "type": "shell",
+      "command": ".\\gradlew.bat assembleDebug",
+      "options": {
+        "cwd": "C:\\Projects\\MonthlyReminder",
+        "env": {
+          "JAVA_HOME": "C:\\dev\\jdk17",
+          "ANDROID_HOME": "C:\\dev\\android-sdk"
+        }
+      },
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Запустить тесты",
+      "type": "shell",
+      "command": ".\\gradlew.bat testDebugUnitTest",
+      "options": {
+        "cwd": "C:\\Projects\\MonthlyReminder",
+        "env": {
+          "JAVA_HOME": "C:\\dev\\jdk17",
+          "ANDROID_HOME": "C:\\dev\\android-sdk"
+        }
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Установить на телефон (adb)",
+      "type": "shell",
+      "command": "C:\\dev\\android-sdk\\platform-tools\\adb.exe install -r app\\build\\outputs\\apk\\debug\\app-debug.apk",
+      "options": {
+        "cwd": "C:\\Projects\\MonthlyReminder",
+        "env": {
+          "JAVA_HOME": "C:\\dev\\jdk17"
+        }
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Показать APK в проводнике",
+      "type": "shell",
+      "command": "explorer.exe /select,\"C:\\Projects\\MonthlyReminder\\app\\build\\outputs\\apk\\debug\\app-debug.apk\"",
+      "problemMatcher": []
+    },
+    {
+      "label": "Собрать release APK",
+      "type": "shell",
+      "command": ".\\gradlew.bat assembleRelease",
+      "options": {
+        "cwd": "C:\\Projects\\MonthlyReminder",
+        "env": {
+          "JAVA_HOME": "C:\\dev\\jdk17",
+          "ANDROID_HOME": "C:\\dev\\android-sdk"
+        }
+      },
+      "problemMatcher": []
+    }
+  ]
+}
