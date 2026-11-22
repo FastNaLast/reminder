@@ -134,10 +134,8 @@ class MainActivity : AppCompatActivity() {
 
         fun updatePreview() {
             dialogBinding.btnDay.text = getString(R.string.day_value, day)
-            dialogBinding.btnTime.text = getString(
-                R.string.time_value,
+            dialogBinding.btnTime.text =
                 String.format(Locale.getDefault(), "%02d:%02d", hour, minute)
-            )
             val preview = AlarmScheduler.nextTrigger(
                 Task(id = 0, title = "", dayOfMonth = day, hour = hour, minute = minute),
                 LocalDateTime.now()
@@ -307,6 +305,24 @@ class MainActivity : AppCompatActivity() {
             dialog.dismiss()
         }
 
+        dialogBinding.btnTestNotification.setOnClickListener {
+            if (!notificationsGranted()) {
+                Toast.makeText(this, R.string.test_notification_blocked, Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+            val sample = Task(
+                id = TEST_NOTIFICATION_ID,
+                title = getString(R.string.test_notification_title),
+                dayOfMonth = 1,
+                hour = 9,
+                minute = 0,
+                enabled = true
+            )
+            Notifications.show(this, sample, snooze = false)
+            Toast.makeText(this, R.string.test_notification_sent, Toast.LENGTH_SHORT).show()
+            dialog.dismiss()
+        }
+
         render()
         dialog.show()
     }
@@ -337,5 +353,10 @@ class MainActivity : AppCompatActivity() {
             .setMessage(R.string.about_text)
             .setPositiveButton(R.string.close, null)
             .show()
+    }
+
+    companion object {
+        /** Идентификатор «задачи» для проверочного уведомления. */
+        private const val TEST_NOTIFICATION_ID = 999_999
     }
 }
